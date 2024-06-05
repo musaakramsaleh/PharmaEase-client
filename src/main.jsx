@@ -10,7 +10,9 @@ ReactDOM.createRoot(document.getElementById('root')).render(
   
     <Firebase_Provider>
       <React.StrictMode>
+   <div className='max-w-[1440px] mx-auto'>
    <RouterProvider router={router} />
+   </div>
   </React.StrictMode>
     </Firebase_Provider>
   
