@@ -22,6 +22,8 @@
     "react-router-dom": "^6.23.1",
     "react-toastify": "^10.0.5",
     "sort-by": "^1.2.0",
+    "swal": "^0.1.0",
+    "sweetalert2": "^11.11.1",
     "swiper": "^11.1.4"
   },
   "devDependencies": {
