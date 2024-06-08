@@ -11,7 +11,7 @@ const Banner = () => {
     return (
         <div>
         <Swiper pagination={true} loop={true} modules={[Pagination]} className="text-center ">
-        <SwiperSlide><div className={`bg-${green}-300 h-[400px] mx-auto flex p-[50px] items-center justify-center rounded-lg`}>
+        <SwiperSlide><div className={`bg-green-300 h-[400px] mx-auto flex p-[50px] items-center justify-center rounded-lg`}>
               <div>
                 <img src={logo} alt="" />
               </div>

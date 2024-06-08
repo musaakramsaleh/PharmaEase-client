@@ -1,8 +1,16 @@
 import React from 'react';
 import { FaShoppingCart } from 'react-icons/fa';
-import { NavLink } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import logo from '../../public/logo.png'
+import UseAuth from '../Hook/UseAuth';
 const Navbar = () => {
+  const {user,logout} = UseAuth()
+const handleSignout =()=>{
+ logout()
+ .then()
+ .catch()
+
+} 
     const navitems = <>
        <li><NavLink to='/' className={({isActive})=>isActive?'text-yellow-600 font-bold':'text-secondary'}>Home</NavLink></li>
        <li><NavLink to='/items' className={({isActive})=>isActive?'text-yellow-600 font-bold':'text-secondary'}>Shop</NavLink></li>
@@ -32,7 +40,40 @@ const Navbar = () => {
     </ul>
   </div>
   <div className="navbar-end">
-    <a className="btn">Button</a>
+    {
+     user? <div className='flex'>
+      <div className='dropdown dropdown-end z-50'>
+     <div
+       tabIndex={0}
+       role='button'
+       className='btn btn-ghost btn-circle avatar'
+     >
+       <div className='w-10 rounded-full' title=''>
+         <img
+           referrerPolicy='no-referrer'
+           alt='User Profile Photo'
+           src={user.photoURL}
+         />
+       </div>
+     </div>
+     <ul
+       tabIndex={0}
+       className='menu menu-sm dropdown-content mt-3 z-50 p-2 shadow bg-base-100 rounded-box w-52'
+     >
+       <li>
+         <NavLink to='/dashboard'><div className='justify-between'>Dashboard</div></NavLink>
+         <NavLink to='/updateprofile'><div className='justify-between'>Update profile</div></NavLink>
+         <NavLink onClick={()=>handleSignout()} className='bg-secondary font-lexend px-5 py-3 rounded-lg font-bold text-white block text-center'>Logout</NavLink>
+       </li>
+     </ul>
+   </div>
+   {/* <button onClick={()=>handleSignout()} className='bg-secondary font-lexend px-5 py-3 rounded-lg font-bold text-white block text-center'></button> */}
+     </div> :<>
+  <Link to='/login'  className='bg-secondary font-lexend px-5 py-3 rounded-lg font-bold text-white block text-center'>Login</Link>
+  </>
+   
+  
+  }
   </div>
 </div>
     );
