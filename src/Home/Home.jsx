@@ -3,6 +3,8 @@ import UseAuth from '../Hook/UseAuth';
 import Banner from './Banner';
 import Swal from 'sweetalert2';
 import Modal from '../Component/Modal/Modal';
+import { Helmet } from 'react-helmet-async';
+
 
 
 const Home = () => {
@@ -28,6 +30,7 @@ const Home = () => {
     
     return (
         <div>
+          <Helmet><title>PharmaEase-Home</title></Helmet>
             <p>hello world</p>
             <Banner></Banner>
             <h1>React Modal Form Example</h1>

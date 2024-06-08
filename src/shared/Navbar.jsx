@@ -13,7 +13,7 @@ const handleSignout =()=>{
 } 
     const navitems = <>
        <li><NavLink to='/' className={({isActive})=>isActive?'text-yellow-600 font-bold':'text-secondary'}>Home</NavLink></li>
-       <li><NavLink to='/items' className={({isActive})=>isActive?'text-yellow-600 font-bold':'text-secondary'}>Shop</NavLink></li>
+       <li><NavLink to='/product' className={({isActive})=>isActive?'text-yellow-600 font-bold':'text-secondary'}>Shop</NavLink></li>
        <li><NavLink to='/haga' className={({isActive})=>isActive?'text-yellow-600 font-bold':'text-secondary'}>Shopping<FaShoppingCart></FaShoppingCart></NavLink></li>
        <li><NavLink className={({isActive})=>isActive?'text-yellow-600 font-bold':'text-secondary'}>Languages</NavLink></li>
     </>
