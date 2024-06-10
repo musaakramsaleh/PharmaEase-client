@@ -3,6 +3,7 @@ import { FaShoppingCart } from 'react-icons/fa';
 import { Link, NavLink } from 'react-router-dom';
 import logo from '../../public/logo.png'
 import UseAuth from '../Hook/UseAuth';
+import useCart from '../Hook/useCart';
 const Navbar = () => {
   const {user,logout} = UseAuth()
 const handleSignout =()=>{
@@ -10,12 +11,13 @@ const handleSignout =()=>{
  .then()
  .catch()
 
-} 
+}
+    const [cart,refetch] = useCart() 
     const navitems = <>
-       <li><NavLink to='/' className={({isActive})=>isActive?'text-yellow-600 font-bold':'text-secondary'}>Home</NavLink></li>
-       <li><NavLink to='/product' className={({isActive})=>isActive?'text-yellow-600 font-bold':'text-secondary'}>Shop</NavLink></li>
-       <li><NavLink to='/shopping' className={({isActive})=>isActive?'text-yellow-600 font-bold':'text-secondary'}>Shopping<FaShoppingCart></FaShoppingCart></NavLink></li>
-       <li><NavLink className={({isActive})=>isActive?'text-yellow-600 font-bold':'text-secondary'}>Languages</NavLink></li>
+       <li><NavLink to='/' className={({isActive})=>isActive?'text-white font-bold text-2xl':'text-red-600 font-bold text-xl'}>Home</NavLink></li>
+       <li><NavLink to='/product' className={({isActive})=>isActive?'text-white font-bold text-2xl':'text-red-600 font-bold text-xl'}>Shop</NavLink></li>
+       <li><NavLink to='/shopping' className={({isActive})=>isActive?'text-white font-bold text-2xl':'text-red-600 font-bold text-xl'}>Shopping<sup>{cart.length}</sup><FaShoppingCart></FaShoppingCart></NavLink></li>
+       <li><NavLink to='/' className={({isActive})=>isActive?'text-white font-bold text-2xl':'text-red-600 font-bold text-xl'}>Languages</NavLink></li>
     </>
     return (
         <div className="navbar bg-gradient-to-r from-cyan-500 to-blue-500">

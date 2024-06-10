@@ -8,12 +8,14 @@ import { useSearchParams } from 'react-router-dom';
 import Modal from '../Component/Modal/Modal';
 import UseAuth from '../Hook/UseAuth';
 import Swal from 'sweetalert2';
+import useCart from '../Hook/useCart';
 
 const Product = () => {
     const [selectedMedicine, setSelectedMedicine] = useState(null);
     const [params, useParams] = useSearchParams();
     const categories = params.get('category');
     const axiosNormal = useAxios();
+    const [cart,refetch] = useCart()
     const { category, isLoading: categoryLoading } = useCategory();
     const [isModalOpen, setIsModalOpen] = useState(false);
     const {user} = UseAuth()
@@ -53,6 +55,7 @@ const Product = () => {
                         timer: 1500
                       });
                 }
+                refetch()
               })
         }
         
