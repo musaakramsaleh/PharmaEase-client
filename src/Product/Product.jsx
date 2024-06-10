@@ -6,6 +6,8 @@ import useCategory from '../Hook/useCategory';
 import Categorycard from './Categorycard';
 import { useSearchParams } from 'react-router-dom';
 import Modal from '../Component/Modal/Modal';
+import UseAuth from '../Hook/UseAuth';
+import Swal from 'sweetalert2';
 
 const Product = () => {
     const [selectedMedicine, setSelectedMedicine] = useState(null);
@@ -14,7 +16,7 @@ const Product = () => {
     const axiosNormal = useAxios();
     const { category, isLoading: categoryLoading } = useCategory();
     const [isModalOpen, setIsModalOpen] = useState(false);
-
+    const {user} = UseAuth()
     const openModal = (medicine) => {
         setSelectedMedicine(medicine);
         setIsModalOpen(true);
@@ -28,7 +30,33 @@ const Product = () => {
             return data;
         },
     });
-
+    
+    const handlecart = medicine =>{
+        const menu_id = medicine._id
+        const name = medicine.itemName
+        const owner = medicine.owner
+        const price = medicine?.perUnitPrice
+        const company = medicine.company
+        const usercart = user.email
+        const quantity = 1
+        const medical = {name,owner,price,company,usercart,quantity,menu_id}
+        if(user && user.email){
+            axiosNormal.post('/carts',medical)
+            .then(res=>{
+                console.log(res.data)
+                if(res.data.insertedId){
+                    Swal.fire({
+                        position: "center",
+                        icon: "success",
+                        title: "Your work has been saved",
+                        showConfirmButton: false,
+                        timer: 1500
+                      });
+                }
+              })
+        }
+        
+    }
     console.log(categories);
     if (isLoading) return <span className="loading loading-spinner mx-auto loading-lg text-center"></span>;
 
@@ -82,7 +110,7 @@ const Product = () => {
                                             )}
                                         </td>
                                         <th>
-                                            <button className="btn btn-ghost">Buy item</button>
+                                            <button onClick={()=>handlecart(medicine)} className="btn btn-ghost">Buy item</button>
                                         </th>
                                     </tr>
                                 ))

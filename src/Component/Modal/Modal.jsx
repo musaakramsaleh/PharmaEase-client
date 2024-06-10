@@ -35,20 +35,24 @@ function Modal({ isOpen, closeModal, medicine }) {
                             leaveTo="opacity-0 scale-95"
                         >
                             <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
-                                <Dialog.Title as="h3" className="text-lg font-medium leading-6 text-gray-900">
-                                    <img src={medicine.imageUpload} alt="" />
+                                <Dialog.Title as="h3">
+                                    <img src={medicine?.imageUpload} alt="" />
                                 </Dialog.Title>
-                                <Dialog.Description className="mt-2">
-                                    This will permanently deactivate your account
+                                <Dialog.Description className="text-center font-bold text-xl">
+                                    {medicine?.itemName}
                                 </Dialog.Description>
 
-                                <div className="mt-4">
-                                    {/* Additional content can go here */}
+                                <div className="mt-4 font-bold text-xl">
+                                   <p>Generic Name: {medicine?.itemGenericName}</p>
+                                   <p>Description: {medicine?.shortDescription}</p>
+                                   <p>Price: ${medicine?.perUnitPrice}</p>
+                                   <p>Item Mass/unit: {medicine?.itemMassUnit}</p>
+                                   <p>Vendor Name: {medicine?.owner.name} </p>
                                 </div>
 
                                 <div className="mt-4">
-                                    <button className="mr-2 px-4 py-2 bg-red-600 text-white rounded" onClick={closeModal}>Deactivate</button>
-                                    <button className="px-4 py-2 bg-gray-600 text-white rounded" onClick={closeModal}>Cancel</button>
+                                    
+                                    <button className="px-4 py-2 bg-gray-600 text-white rounded" onClick={closeModal}>Close</button>
                                 </div>
                             </Dialog.Panel>
                         </Transition.Child>
