@@ -31,15 +31,7 @@ const Home = () => {
     return (
         <div>
           <Helmet><title>PharmaEase-Home</title></Helmet>
-            <p>hello world</p>
             <Banner></Banner>
-            <h1>React Modal Form Example</h1>
-            <button onClick={handleclick}>click me</button>
-            <button onClick={()=>setIsEditModalOpen(true)}></button>
-            <div>
-      <button onClick={openModal}>Open Modal</button>
-      <Modal isOpen={isModalOpen} closeModal={closeModal} />
-    </div>
         </div>
     );
 };

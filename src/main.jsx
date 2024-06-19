@@ -15,7 +15,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
     <Firebase_Provider>
     <HelmetProvider>
       <React.StrictMode>
-   <div className='max-w-[1440px] mx-auto'>
+   <div className='mx-auto'>
    <RouterProvider router={router} />
    </div>
   </React.StrictMode>

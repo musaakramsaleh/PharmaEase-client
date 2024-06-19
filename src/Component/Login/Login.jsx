@@ -10,8 +10,8 @@ const Login = () => {
     const { user, loginUser, googleLogin } = UseAuth();
     const location = useLocation();
     const navigate = useNavigate();
-    const from = location?.state?.from?.pathname || '/';
-    console.log(from);
+    const from = location?.state || '/' 
+    console.log(location.state);
 
     const handlesociallogin = (socialProvider) => {
         socialProvider()

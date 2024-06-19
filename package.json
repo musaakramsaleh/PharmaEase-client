@@ -11,13 +11,22 @@
   },
   "dependencies": {
     "@headlessui/react": "^2.0.4",
+    "@stripe/react-stripe-js": "^2.7.1",
+    "@stripe/stripe-js": "^3.5.0",
     "@tanstack/react-query": "^5.40.1",
     "axios": "^1.7.2",
     "firebase": "^10.12.2",
+    "json2csv": "^6.0.0-alpha.2",
+    "jsonwebtoken": "^9.0.2",
+    "jspdf": "^2.5.1",
+    "jspdf-autotable": "^3.8.2",
     "localforage": "^1.10.0",
     "match-sorter": "^6.3.4",
     "query-string": "^9.0.0",
     "react": "^18.2.0",
+    "react-csv": "^2.2.2",
+    "react-data-table-component": "^7.6.2",
+    "react-datepicker": "^7.1.0",
     "react-dom": "^18.2.0",
     "react-helmet-async": "^2.0.5",
     "react-hook-form": "^7.51.5",
@@ -28,7 +37,8 @@
     "sort-by": "^1.2.0",
     "swal": "^0.1.0",
     "sweetalert2": "^11.11.1",
-    "swiper": "^11.1.4"
+    "swiper": "^11.1.4",
+    "xlsx": "^0.18.5"
   },
   "devDependencies": {
     "@types/react": "^18.2.66",

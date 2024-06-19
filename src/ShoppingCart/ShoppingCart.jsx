@@ -3,18 +3,14 @@ import { useNavigate } from 'react-router-dom';
 import CartItem from './CartItem';
 import useCart from '../Hook/useCart';
 import useAxios from '../Hook/useAxios';
+import UseAuth from '../Hook/UseAuth';
 
 const ShoppingCart = () => {
     const navigate = useNavigate();
-    const [cart] = useCart()
-    const [,refetch] = useCart()
+    const [cart,refetch] = useCart()
+    const {user} = UseAuth()
     const axiosNormal = useAxios()
-    console.log(cart)
-    const [carts, setCart] = useState([
-        { id: 1, name: 'Medicine A', company: 'Company A', price: 10, quantity: 1 },
-        { id: 2, name: 'Medicine B', company: 'Company B', price: 15, quantity: 2 },
-    ]);
-
+    
     const handleIncrease = async (medicine) => {
         try {
             const response = await axiosNormal.patch(`/cart/${medicine._id}`, {
@@ -26,7 +22,6 @@ const ShoppingCart = () => {
             console.error("Error increasing quantity:", error);
         }
     };
-
     const handleDecrease = async (medicine) => {
         if (medicine.quantity > 1) {
             try {
@@ -51,12 +46,19 @@ const ShoppingCart = () => {
         }
     };
 
-    const handleClearCart = () => {
-        setCart([]);
+
+    const handleClearCart = async() => {
+        try {
+            const response = await axiosNormal.delete(`/carts?email=${user.email}`);
+            console.log("All data removed", response.data);
+            refetch(); 
+        } catch (error) {
+            console.error("Error removing item:", error);
+        }
     };
 
     const handleCheckout = () => {
-        navigate('/checkout');
+        navigate('/Payment');
     };
 
     return (

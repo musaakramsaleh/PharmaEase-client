@@ -6,17 +6,40 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import UseAuth from '../../../Hook/UseAuth';
 import Swal from 'sweetalert2';
+import { FaGoogle } from 'react-icons/fa';
+import useAxios from '../../../Hook/useAxios';
 
 const Register = () => {
-    const {createUser,user,updateuserProfile} = UseAuth()
+    const {createUser,user,googleLogin,updateuserProfile} = UseAuth()
     const location = useLocation()
     const navigate = useNavigate()
+    const axiosNormal = useAxios()
     const from = location?.state || '/'
     const {
         register,
         handleSubmit,
         formState: { errors },
     } = useForm();
+    const handlesociallogin = (socialProvider) => {
+      socialProvider()
+      .then(result => {
+          console.log(result.user)
+          const userInfo ={
+            email: result.user?.email,
+            name: result.user?.displayName,
+            photo: result.user?.photoURL,
+            role: 'user'
+          }
+          axiosNormal.post('/user',userInfo)
+          .then(res=>{
+            console.log(res.data)
+            navigate(from)
+          })
+      })
+      .catch(error => {
+          toast('Failed to login');
+      });
+  };
     const onSubmit = (data) =>{
         const {name,email,photo,password} = data
         console.log(name,email,photo,password)
@@ -38,16 +61,21 @@ const Register = () => {
           if(password.length <6){
             return toast("Password have to be 6 character")
           }
-        const re = {name,email,password,photo}
+        const re = {name,email,password,photo,role:'user'}
         createUser(email,password)
         .then(()=>{
             updateuserProfile(name,photo).then(()=>{
-              Swal.fire({
-                title: "Success!",
-                text: "User created Successfully!",
-                icon: "success"
-              });
-              navigate(from);
+              axiosNormal.post('/user',re)
+              .then(res=>{
+                if(res.data.insertedId){
+                  Swal.fire({
+                    title: "Success!",
+                    text: "User created Successfully!",
+                    icon: "success",
+                  });
+                }
+                navigate(from);
+              })
               
             })
           
@@ -94,6 +122,10 @@ const Register = () => {
            <input type="Submit" defaultValue='Register' placeholder="Type here" className="cursor-pointer bg-secondary text-white font-lexend font-bold mt-5 input w-full" />
            </form>
            </div>
+           <button 
+          onClick={() => handlesociallogin(googleLogin)} 
+          className='p-2 flex items-center justify-between gap-1 bg-secondary w-[3/4] rounded-lg text-white font-semibold mb-4 text-[16px]'>
+          <FaGoogle />Google Login</button>
             <ToastContainer />
         </div>
     );

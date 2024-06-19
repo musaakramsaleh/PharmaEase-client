@@ -14,10 +14,10 @@ const handleSignout =()=>{
 }
     const [cart,refetch] = useCart() 
     const navitems = <>
-       <li><NavLink to='/' className={({isActive})=>isActive?'text-white font-bold text-2xl':'text-red-600 font-bold text-xl'}>Home</NavLink></li>
-       <li><NavLink to='/product' className={({isActive})=>isActive?'text-white font-bold text-2xl':'text-red-600 font-bold text-xl'}>Shop</NavLink></li>
-       <li><NavLink to='/shopping' className={({isActive})=>isActive?'text-white font-bold text-2xl':'text-red-600 font-bold text-xl'}>Shopping<sup>{cart.length}</sup><FaShoppingCart></FaShoppingCart></NavLink></li>
-       <li><NavLink to='/' className={({isActive})=>isActive?'text-white font-bold text-2xl':'text-red-600 font-bold text-xl'}>Languages</NavLink></li>
+       <li><NavLink to='/' className={({isActive})=>isActive?'text-white font-bold text-2xl':'text-red-600 font-bold text-2xl'}>Home</NavLink></li>
+       <li><NavLink to='/product' className={({isActive})=>isActive?'text-white font-bold text-2xl':'text-red-600 font-bold text-2xl'}>Shop</NavLink></li>
+       <li><NavLink to='/shopping' className={({isActive})=>isActive?'text-white font-bold text-2xl':'text-red-600 font-bold text-2xl'}>Shopping<sup>{cart.length}</sup><FaShoppingCart></FaShoppingCart></NavLink></li>
+       <li><NavLink to='/' className={({isActive})=>isActive?'text-white font-bold text-2xl':'text-red-600 font-bold text-2xl'}>Languages</NavLink></li>
     </>
     return (
         <div className="navbar bg-gradient-to-r from-cyan-500 to-blue-500">
@@ -32,7 +32,7 @@ const handleSignout =()=>{
         }
       </ul>
     </div>
-    <a className="btn btn-ghost text-xl"><div className='flex items-center justify-around'><p>PharmaEase</p><img className='w-[50px]' src={logo} alt=""/> </div></a>
+    <a className="btn btn-ghost text-xl"><div className='flex items-center justify-around text-2xl'><p>PharmaEase</p><img className='w-[50px]' src={logo} alt=""/> </div></a>
   </div>
   <div className="navbar-center hidden lg:flex">
     <ul className="menu menu-horizontal px-1">
