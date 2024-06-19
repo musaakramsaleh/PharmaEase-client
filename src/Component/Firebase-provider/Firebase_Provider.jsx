@@ -36,7 +36,7 @@ const Firebase_Provider = ({children}) => {
           return ()=>{
             unSubscribe();
           }
-    },[])
+    },[axiosNormal])
     const loginUser =(email,password)=>{
         setLoading(true)
         return signInWithEmailAndPassword(auth, email, password)
