@@ -10,6 +10,7 @@ import Privateroute from "../PrivateRoute/Privateroute";
 import Seller from "../Dashboard/Seller";
 import Dashboard from "../Dashboard/Dashboard";
 import User from "../Dashboard/User";
+import CategoryDetails from "../Home/CategoryDetails";
 
 const router = createBrowserRouter([
     {
@@ -40,7 +41,10 @@ const router = createBrowserRouter([
         path:'payment',
         element:<Privateroute><Payment></Payment></Privateroute>
       },
-      
+      {
+        path:'/categories/:category',
+        element:<CategoryDetails></CategoryDetails>,
+    }
     ]
     },
     {

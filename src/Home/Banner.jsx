@@ -9,7 +9,7 @@ import { Pagination } from 'swiper/modules';
 const Banner = () => {
     const green = 'green'
     return (
-        <div>
+        <div className='max-w-[1440px] mx-auto mt-5'>
         <Swiper pagination={true} loop={true} modules={[Pagination]} className="text-center ">
         <SwiperSlide><div className={`bg-green-300 h-[400px] mx-auto flex p-[50px] items-center justify-center rounded-lg`}>
               <div>
