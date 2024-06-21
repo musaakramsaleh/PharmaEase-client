@@ -6,102 +6,69 @@ import { CSVLink } from 'react-csv';
 import * as XLSX from 'xlsx';
 import jsPDF from 'jspdf';
 import autoTable from 'jspdf-autotable';
+import { useQuery } from '@tanstack/react-query';
+import UseAxiosSecure from '../Hook/UseAxiosSecure';
+import Headline from '../shared/Headline';
+import Swal from 'sweetalert2';
 
 const Sales = () => {
     const [salesData, setSalesData] = useState([]);
-    const [filteredData, setFilteredData] = useState([]);
-    const [startDate, setStartDate] = useState(null);
-    const [endDate, setEndDate] = useState(null);
+    const axiosSecure = UseAxiosSecure();
 
-    useEffect(() => {
-        // Fetch sales data from your API
-        fetchSalesData();
-    }, []);
-
-    const fetchSalesData = async () => {
-        // Replace with your API call
-        const response = await fetch('/api/sales');
-        const data = await response.json();
-        setSalesData(data);
-        setFilteredData(data);
-    };
-
-    const handleFilter = () => {
-        if (startDate && endDate) {
-            const filtered = salesData.filter(sale => {
-                const saleDate = new Date(sale.date);
-                return saleDate >= startDate && saleDate <= endDate;
+    const { data: payment = [], isLoading ,refetch} = useQuery({
+        queryKey: ['payment'],
+        queryFn: async () => {
+          const response = await axiosSecure.get(`/payments`);
+          return response.data;
+        },
+      });
+    const updatestatus= async(id)=>{
+        try {
+            const response = await axiosSecure.patch(`/payments/${id}`, {
+                status: "paid"
             });
-            setFilteredData(filtered);
-        } else {
-            setFilteredData(salesData);
+            console.log(response.data);
+            Swal.fire({
+                icon: 'success',
+                title: 'Status Updated',
+                text: 'Payment status has been updated successfully!',
+            }); 
+            refetch();
+        } catch (error) {
+            console.error('Error updating status:', error);
         }
-    };
-
-    const columns = [
-        { name: 'Medicine Name', selector: 'medicineName', sortable: true },
-        { name: 'Seller Email', selector: 'sellerEmail', sortable: true },
-        { name: 'Buyer Email', selector: 'buyerEmail', sortable: true },
-        { name: 'Total Price', selector: 'totalPrice', sortable: true },
-        { name: 'Date', selector: 'date', sortable: true, format: row => new Date(row.date).toLocaleDateString() },
-    ];
-
-    const exportToCSV = () => {
-        const csvData = filteredData.map(row => ({
-            MedicineName: row.medicineName,
-            SellerEmail: row.sellerEmail,
-            BuyerEmail: row.buyerEmail,
-            TotalPrice: row.totalPrice,
-            Date: new Date(row.date).toLocaleDateString(),
-        }));
-    };
-
-    const exportToXLSX = () => {
-        const worksheet = XLSX.utils.json_to_sheet(filteredData);
-        const workbook = XLSX.utils.book_new();
-        XLSX.utils.book_append_sheet(workbook, worksheet, 'SalesReport');
-        XLSX.writeFile(workbook, 'sales_report.xlsx');
-    };
-
-    const exportToPDF = () => {
-        const doc = new jsPDF();
-        autoTable(doc, { html: '#sales-table' });
-        doc.save('sales_report.pdf');
-    };
-
+    }
     return (
-        <div>
-            <h1>Sales Report</h1>
-            <div className="filter-container">
-                <DatePicker
-                    selected={startDate}
-                    onChange={date => setStartDate(date)}
-                    selectsStart
-                    startDate={startDate}
-                    endDate={endDate}
-                    placeholderText="Start Date"
-                />
-                <DatePicker
-                    selected={endDate}
-                    onChange={date => setEndDate(date)}
-                    selectsEnd
-                    startDate={startDate}
-                    endDate={endDate}
-                    minDate={startDate}
-                    placeholderText="End Date"
-                />
-                <button onClick={handleFilter}>Filter</button>
-            </div>
-            <DataTable
-                columns={columns}
-                data={filteredData}
-                pagination
-            />
-            <div className="export-buttons">
-                <CSVLink data={filteredData} filename="sales_report.csv">Export to CSV</CSVLink>
-                <button onClick={exportToXLSX}>Export to XLSX</button>
-                <button onClick={exportToPDF}>Export to PDF</button>
-            </div>
+        <div className="container mx-auto p-4 overflow-x-auto">
+            <Headline title='Your Medicines' description="Manage all the medicines you have uploaded to sell"></Headline>
+            {payment.length === 0 ? (
+                <p>No medicines found.</p>
+            ) : (
+                <table className="table-auto w-full mt-3">
+                    <thead>
+                        <tr>
+                            <th className='border border-b-2'>Medicine Name</th>
+                            <th className='border border-b-2'>Seller Email</th>
+                            <th className='border border-b-2'>Buyer Email</th>
+                            <th className='border border-b-2'>Total Price</th>
+                            <th className='border border-b-2'>Status</th>
+                            <th className='border border-b-2'>order time</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {payment.map(medicine => (
+                            <tr className='text-center font-bold' key={medicine._id}>
+                                <td className='border border-b-2'>{medicine.items.map(item=><p>{item.name}</p>)}</td>
+                                <td className='border border-b-2'>{medicine.itemOwner.map(item=><p>{item.email}</p>)}</td>
+                                <td className='border border-b-2'>{medicine.email}</td>
+                                <td className='border border-b-2'>{medicine.price}</td>
+                                <td className='border border-b-2'>{medicine.status==="Pending"?<button onClick={()=>updatestatus(medicine._id)} className='btn bg-gradient-to-b from-cyan-500 to-blue-500 text-white'>{medicine.status}</button>:medicine.status}</td>
+                                <td className='border border-b-2'>{new Date(medicine.date).toLocaleString()}</td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+            )}
         </div>
     );
 };

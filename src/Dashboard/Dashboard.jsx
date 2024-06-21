@@ -37,6 +37,11 @@ const Dashboard = () => {
                               Hello
                             </NavLink>
                         </li>
+                        <li>
+                        <NavLink to='/dashboard/sales' className='text-white'>
+                              Sales
+                            </NavLink>
+                        </li>
                     </ul>
                 </div>
             </div>
