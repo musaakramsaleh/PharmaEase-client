@@ -11,6 +11,7 @@ import Seller from "../Dashboard/Seller";
 import Dashboard from "../Dashboard/Dashboard";
 import User from "../Dashboard/User";
 import CategoryDetails from "../Home/CategoryDetails";
+import Invoice from "../ShoppingCart/Invoice";
 
 const router = createBrowserRouter([
     {
@@ -44,6 +45,10 @@ const router = createBrowserRouter([
       {
         path:'/categories/:category',
         element:<CategoryDetails></CategoryDetails>,
+    },
+    {
+      path:'/invoice',
+      element:<Invoice></Invoice>
     }
     ]
     },

@@ -6,12 +6,13 @@ import UseAuth from '../../Hook/UseAuth';
 import useCategory from '../../Hook/useCategory'
 import useAxios from '../../Hook/useAxios';
 import Swal from 'sweetalert2';
+import UseAxiosSecure from '../../Hook/UseAxiosSecure';
 function AddMedicineModal({ isOpen, closeModal }) {
     const [open, setIsOpen] = useState(false);
     const {category} = useCategory()
     const { register, handleSubmit, reset, formState: { errors } } = useForm();
     const {user} = UseAuth()
-    const axiosNormal = useAxios()
+    const axiosSecure = UseAxiosSecure()
     useEffect(() => {
         setIsOpen(isOpen);
     }, [isOpen]);
@@ -31,7 +32,7 @@ function AddMedicineModal({ isOpen, closeModal }) {
         const owner = {name,email}
         const product = {itemName,itemGenericName,shortDescription,imageUpload,category,company,itemMassUnit,perUnitPrice,discountPercentage,owner}
         if(user && user.email){
-            axiosNormal.post('/product',product)
+            axiosSecure.post('/product',product)
             .then(res=>{
                 console.log(res.data)
                 if(res.data.insertedId){

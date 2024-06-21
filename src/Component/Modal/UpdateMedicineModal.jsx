@@ -5,10 +5,11 @@ import useAxios from '../../Hook/useAxios';
 import Swal from 'sweetalert2';
 import pharmaceuticalCompanies from '../../../public/category';
 import useCategory from '../../Hook/useCategory';
+import UseAxiosSecure from '../../Hook/UseAxiosSecure';
 
 const UpdateMedicineModal = ({ isOpen, closeModal, medicine }) => {
     const { register, handleSubmit, reset, formState: { errors } } = useForm();
-    const axiosNormal = useAxios();
+    const axiosSecure = UseAxiosSecure();
     const { category } = useCategory();
 
     React.useEffect(() => {
@@ -33,7 +34,7 @@ const UpdateMedicineModal = ({ isOpen, closeModal, medicine }) => {
                 discountPercentage: parseFloat(data.discountPercentage || 0),
             };
 
-            await axiosNormal.put(`/product/${medicine._id}`, updatedData);
+            await axiosSecure.put(`/product/${medicine._id}`, updatedData);
             Swal.fire({
                 position: 'center',
                 icon: 'success',

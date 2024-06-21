@@ -4,13 +4,15 @@ import CartItem from './CartItem';
 import useCart from '../Hook/useCart';
 import useAxios from '../Hook/useAxios';
 import UseAuth from '../Hook/UseAuth';
+import Headline from '../shared/Headline';
+import { FaShoppingBasket } from 'react-icons/fa';
 
 const ShoppingCart = () => {
     const navigate = useNavigate();
-    const [cart,refetch] = useCart()
-    const {user} = UseAuth()
-    const axiosNormal = useAxios()
-    
+    const [cart, refetch] = useCart();
+    const { user } = UseAuth();
+    const axiosNormal = useAxios();
+
     const handleIncrease = async (medicine) => {
         try {
             const response = await axiosNormal.patch(`/cart/${medicine._id}`, {
@@ -22,6 +24,7 @@ const ShoppingCart = () => {
             console.error("Error increasing quantity:", error);
         }
     };
+
     const handleDecrease = async (medicine) => {
         if (medicine.quantity > 1) {
             try {
@@ -46,8 +49,7 @@ const ShoppingCart = () => {
         }
     };
 
-
-    const handleClearCart = async() => {
+    const handleClearCart = async () => {
         try {
             const response = await axiosNormal.delete(`/carts?email=${user.email}`);
             console.log("All data removed", response.data);
@@ -61,11 +63,16 @@ const ShoppingCart = () => {
         navigate('/Payment');
     };
 
+    const total = cart.reduce((total, item) => total + (item.price * item.quantity), 0);
+
     return (
         <div className="container mx-auto p-4">
-            <h1 className="text-2xl font-bold mb-4">Your Cart</h1>
+            <Headline title="Shopping Cart" description={`Total amount $${total}`} />
             {cart.length === 0 ? (
-                <p>Your cart is empty.</p>
+                <div className="flex flex-col items-center justify-center h-full">
+                    <FaShoppingBasket className='text-9xl text-blue-600 text-center'></FaShoppingBasket>
+                    <p className="text-2xl font-semibold text-gray-700">Your cart is empty.</p>
+                </div>
             ) : (
                 <div>
                     {cart.map(medicine => (
@@ -78,8 +85,8 @@ const ShoppingCart = () => {
                         />
                     ))}
                     <div className="flex justify-between mt-4">
-                        <button onClick={handleClearCart} className="px-4 py-2 bg-red-500 text-white">Clear Cart</button>
-                        <button onClick={handleCheckout} className="px-4 py-2 bg-green-500 text-white">Checkout</button>
+                        <button onClick={handleClearCart} className="px-4 py-2 bg-red-500 text-white rounded-md shadow-md hover:bg-red-600 transition duration-300">Clear Cart</button>
+                        <button onClick={handleCheckout} className="px-4 py-2 bg-green-500 text-white rounded-md shadow-md hover:bg-green-600 transition duration-300">Checkout</button>
                     </div>
                 </div>
             )}

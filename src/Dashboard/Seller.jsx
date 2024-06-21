@@ -4,12 +4,14 @@ import UseAuth from '../Hook/UseAuth';
 import { useQuery } from '@tanstack/react-query';
 import useAxios from '../Hook/useAxios';
 import UpdateMedicineModal from '../Component/Modal/UpdateMedicineModal'; // Import the UpdateMedicineModal
+import Headline from '../shared/Headline';
+import UseAxiosSecure from '../Hook/UseAxiosSecure';
 
 const Seller = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [selectedMedicine, setSelectedMedicine] = useState(null);
     const { user } = UseAuth();
-    const axiosNormal = useAxios();
+    const axiosSecure = UseAxiosSecure();
 
     const openModal = () => setIsModalOpen(true);
     const closeModal = () => setIsModalOpen(false);
@@ -18,7 +20,7 @@ const Seller = () => {
         queryKey: ['products', user?.email],
         queryFn: async () => {
             if (!user?.email) return [];
-            const response = await axiosNormal.get(`/product/${user?.email}`);
+            const response = await axiosSecure.get(`/product/${user?.email}`);
             return response.data;
         },
         enabled: !!user?.email,
@@ -34,12 +36,12 @@ const Seller = () => {
     }
     refetch()
     return (
-        <div className="container mx-auto overflow-x-auto p-4">
-            <h1 className="text-2xl font-bold mb-4 text-center">Your Medicines</h1>
+        <div className="container mx-auto p-4 overflow-x-auto">
+            <Headline title='Your Medicines' description="Manage all the medicines you have uploaded to sell"></Headline>
             {medicines.length === 0 ? (
                 <p>No medicines found.</p>
             ) : (
-                <table className="table-auto w-full">
+                <table className="table-auto w-full mt-3">
                     <thead>
                         <tr>
                             <th>Item Name</th>
