@@ -14,10 +14,10 @@ const handleSignout =()=>{
 }
     const [cart,refetch] = useCart() 
     const navitems = <>
-       <li><NavLink to='/' className={({isActive})=>isActive?'text-white font-bold text-2xl':'text-red-600 font-bold text-2xl'}>Home</NavLink></li>
-       <li><NavLink to='/product' className={({isActive})=>isActive?'text-white font-bold text-2xl':'text-red-600 font-bold text-2xl'}>Shop</NavLink></li>
-       <li><NavLink to='/shopping' className={({isActive})=>isActive?'text-white font-bold text-2xl':'text-red-600 font-bold text-2xl'}>Shopping<sup>{cart.length}</sup><FaShoppingCart></FaShoppingCart></NavLink></li>
-       <li><NavLink to='/' className={({isActive})=>isActive?'text-white font-bold text-2xl':'text-red-600 font-bold text-2xl'}>Languages</NavLink></li>
+       <li><NavLink to='/' className={({isActive})=>isActive?'text-white font-bold text-2xl':'text-black font-bold text-2xl'}>Home</NavLink></li>
+       <li><NavLink to='/product' className={({isActive})=>isActive?'text-white font-bold text-2xl':'text-black font-bold text-2xl'}>Shop</NavLink></li>
+       <li><NavLink to='/shopping' className={({isActive})=>isActive?'text-white font-bold text-2xl':'text-black font-bold text-2xl'}>Shopping<sup>{cart.length}</sup><FaShoppingCart></FaShoppingCart></NavLink></li>
+       <li><NavLink to='/' className={({isActive})=>isActive?'text-white font-bold text-2xl':'text-black font-bold text-2xl'}>Languages</NavLink></li>
     </>
     return (
         <div className="navbar bg-gradient-to-r from-cyan-500 to-blue-500">

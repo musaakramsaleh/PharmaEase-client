@@ -6,6 +6,7 @@ import useCart from '../Hook/useCart';
 import UseAuth from '../Hook/UseAuth';
 import Modal from '../Component/Modal/Modal';
 import Swal from 'sweetalert2';
+import { FaEye } from 'react-icons/fa';
 
 const Product = () => {
     const axiosNormal = useAxios();
@@ -137,13 +138,13 @@ const Product = () => {
                                             <h2 className='{medicine.company}'>{medicine.company}</h2>
                                         </td>
                                         <td>
-                                            <button onClick={() => openModal(medicine)}>See details</button>
+                                            <button onClick={() => openModal(medicine)}><FaEye></FaEye></button>
                                             {selectedMedicine && selectedMedicine._id === medicine._id && (
                                                 <Modal medicine={selectedMedicine} isOpen={isModalOpen} closeModal={closeModal} />
                                             )}
                                         </td>
                                         <th>
-                                            <button onClick={() => handleCart(medicine)} className="btn btn-ghost">Buy item</button>
+                                            <button onClick={() => handleCart(medicine)} className="btn bg-gradient-to-b from-cyan-500 to-blue-500 text-white">Select</button>
                                         </th>
                                     </tr>
                                 ))
