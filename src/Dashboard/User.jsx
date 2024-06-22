@@ -15,7 +15,7 @@ const User = () => {
             return res.data;
         }
     });
-    const makeAdmin = async(id)=>{
+    const makead = async(id)=>{
         try {
             const response = await axiosSecure.patch(`/users/${id}`, {
                 role: "admin"
@@ -85,7 +85,7 @@ const User = () => {
                                 <td className="py-2 px-4 border-b border-gray-300">{user.name}</td>
                                 <td className="py-2 px-4 border-b border-gray-300">{user.role}</td>
                                 <td className="py-2 px-4 border-b border-gray-300">{user.email}</td>
-                                <td className="py-2 px-4 border-b border-gray-300">{user.role==='admin'?'Cannot change':user.role==='seller'?<div><button onClick={()=>makeAdmin(user.email)} className='btn bg-gradient-to-b from-cyan-500 to-blue-500 text-white'>Make Admin</button><button onClick={()=>makeuser(user.email)} className='btn bg-gradient-to-b from-cyan-500 to-blue-500 text-white'>Make User</button ></div>:<button onClick={()=>makeseller(user.email)} className='btn bg-gradient-to-b from-cyan-500 to-blue-500 text-white'>Make Seller</button>}</td>
+                                <td className="py-2 px-4 border-b border-gray-300">{user.role==='admin'?'Cannot change':user.role==='seller'?<div><button onClick={()=>makead(user.email)} className='btn bg-gradient-to-b from-cyan-500 to-blue-500 text-white'>Make Admin</button><button onClick={()=>makeuser(user.email)} className='btn bg-gradient-to-b from-cyan-500 to-blue-500 text-white'>Make User</button ></div>:<button onClick={()=>makeseller(user.email)} className='btn bg-gradient-to-b from-cyan-500 to-blue-500 text-white'>Make Seller</button>}</td>
                             </tr>
                         ))}
                     </tbody>

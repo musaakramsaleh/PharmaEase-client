@@ -67,6 +67,11 @@ const Dashboard = () => {
                                         Banner Advertise <FaAdversal />
                                     </NavLink>
                                 </li>
+                                <li>
+                                    <NavLink to='/dashboard/adminbanner' className='text-white'>
+                                        Banner Advertise<FaAdversal />
+                                    </NavLink>
+                                </li>
                             </>
                         )}
 

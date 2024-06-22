@@ -19,6 +19,7 @@ import Sellerdashboard from "../Dashboard/Sellerdashboard";
 import UserPayment from "../Dashboard/UserPayment";
 import ManageCategory from "../Dashboard/ManageCategory";
 import Bannermanage from "../Dashboard/Bannermanage";
+import Adminbanner from "../Dashboard/Adminbanner";
 
 const router = createBrowserRouter([
     {
@@ -102,6 +103,10 @@ const router = createBrowserRouter([
       {
         path:'bannermanage',
         element:<Bannermanage></Bannermanage>
+      },
+      {
+        path:'adminbanner',
+        element:<Adminbanner></Adminbanner>
       }
      ]
     },

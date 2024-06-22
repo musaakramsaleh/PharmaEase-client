@@ -6,6 +6,7 @@ import Modal from '../Component/Modal/Modal';
 import { Helmet } from 'react-helmet-async';
 import Headline from '../shared/Headline';
 import Category from './Category';
+import FAQ from './FAQ';
 
 
 
@@ -17,6 +18,7 @@ const Home = () => {
             <div>
               <Headline title="Category" description="Buy from wide range of variety of products"></Headline>
               <Category></Category>
+              <FAQ></FAQ>
             </div>
         </div>
     );
