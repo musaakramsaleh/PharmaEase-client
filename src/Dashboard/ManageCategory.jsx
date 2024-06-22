@@ -5,9 +5,10 @@ import Addcategorymodal from '../Component/Modal/Addcategorymodal';
 import UseAxiosSecure from '../Hook/UseAxiosSecure';
 import useCategory from '../Hook/useCategory';
 import Updatecategorymodal from '../Component/Modal/Updatecategorymodal';
+import Swal from 'sweetalert2';
 
 const ManageCategory = () => {
-    const { category } = useCategory();
+    const { category, refetch } = useCategory();
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [selectedMedicine, setSelectedMedicine] = useState(null);
     const axiosSecure = UseAxiosSecure();
@@ -16,6 +17,74 @@ const ManageCategory = () => {
     const closeModal = () => setIsModalOpen(false);
     console.log(category);
 
+    const handleUpdate = async (category) => {
+        const { value: formValues } = await Swal.fire({
+            title: "Update Category",
+            html: `
+                <label>Category Name</label><br>
+                <input id="swal-input1" class="swal2-input" value="${category.category}"><br>
+                <label>Image URL</label><br>
+                <input id="swal-input2" class="swal2-input" value="${category.image}">
+            `,
+            focusConfirm: false,
+            preConfirm: () => {
+                const categoryName = document.getElementById("swal-input1").value;
+                const image = document.getElementById("swal-input2").value;
+                return { category: categoryName, image: image }; // Ensure this matches the backend expectation
+            }
+        });
+
+        if (formValues) {
+            try {
+                const response1 = await axiosSecure.put(`/category/${category._id}`, formValues);
+                console.log(response1.data);
+                Swal.fire({
+                    title: "Success!",
+                    text: "Category Updated Successfully",
+                    icon: "success"
+                });
+                refetch();
+            } catch (err) {
+                console.error(err);
+                Swal.fire({
+                    title: "Error!",
+                    text: "Failed to update category",
+                    icon: "error"
+                });
+            }
+        }
+    };
+    const handleDelete = async (category) => {
+        const result = await Swal.fire({
+            title: "Are you sure?",
+            text: `Do you really want to delete the category "${category.category}"?`,
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#d33",
+            cancelButtonColor: "#3085d6",
+            confirmButtonText: "Yes, delete it!"
+        });
+
+        if (result.isConfirmed) {
+            try {
+                const response = await axiosSecure.delete(`/category/${category._id}`);
+                console.log(response.data);
+                Swal.fire({
+                    title: "Deleted!",
+                    text: "Category has been deleted.",
+                    icon: "success"
+                });
+                refetch();
+            } catch (err) {
+                console.error(err);
+                Swal.fire({
+                    title: "Error!",
+                    text: "Failed to delete category",
+                    icon: "error"
+                });
+            }
+        }
+    };
     return (
         <div>
             <Headline title="All Categories" description="Add or remove categories from medicine list" />
@@ -48,12 +117,12 @@ const ManageCategory = () => {
                                     <td className="py-3 px-4 border-b">{item.quantity}</td>
                                     <td className="py-3 px-4 border-b">
                                         <div className='flex md:flex-row flex-col mx-auto justify-center'>
-                                        <button onClick={() => setSelectedMedicine(item)} className="px-4 py-2 mr-3 bg-blue-500 text-white rounded hover:bg-blue-600">
-                                          Update
-                                        </button>
-                                        <button onClick={() => setSelectedMedicine(item)} className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">
-                                          Delete
-                                        </button>
+                                            <button onClick={() => handleUpdate(item)} className="px-4 py-2 mr-3 bg-blue-500 text-white rounded hover:bg-blue-600">
+                                                Update
+                                            </button>
+                                            <button onClick={() => handleDelete(item)} className="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600">
+                                                Delete
+                                            </button>
                                         </div>
                                     </td>
                                 </tr>
