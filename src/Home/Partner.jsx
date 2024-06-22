@@ -24,7 +24,7 @@ const Partner = () => {
            </div>
            <div>
             <img src={Bayer} alt="" />
-            <p className='text-center text-2xl font-bold'>Johnson and Johnson</p>
+            <p className='text-center text-2xl font-bold'>Bayer</p>
            </div>
            </div>
         </div>
