@@ -13,6 +13,10 @@ import User from "../Dashboard/User";
 import CategoryDetails from "../Home/CategoryDetails";
 import Invoice from "../ShoppingCart/Invoice";
 import Sales from "../Dashboard/Sales";
+import Adminhome from "../Dashboard/Adminhome";
+import PaymentHistory from "../Dashboard/PaymentHistory";
+import Sellerdashboard from "../Dashboard/Sellerdashboard";
+import UserPayment from "../Dashboard/UserPayment";
 
 const router = createBrowserRouter([
     {
@@ -58,6 +62,10 @@ const router = createBrowserRouter([
      element:<Dashboard></Dashboard>,
      children:[
       {
+       path:'admin',
+       element:<Adminhome></Adminhome>
+      },
+      {
         path:'seller',
         element:<Seller></Seller>
       },
@@ -72,6 +80,18 @@ const router = createBrowserRouter([
       {
         path:'sales',
         element:<Sales></Sales>
+      },
+      {
+        path:'payment',
+        element:<PaymentHistory></PaymentHistory>
+      },
+      {
+        path:'sellerdashboard',
+        element:<Sellerdashboard></Sellerdashboard>
+      },
+      {
+        path:'userpayment',
+        element:<UserPayment></UserPayment>
       }
      ]
     },

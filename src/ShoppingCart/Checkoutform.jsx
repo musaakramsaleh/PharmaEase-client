@@ -78,6 +78,8 @@ const Checkoutform = () => {
                         name: item.name,
                         quantity: item.quantity,
                         price: item.price,
+                        owner: item.owner,
+                        transaction:paymentIntent.id
                     })),
                     transaction: paymentIntent.id,
                     status: "Pending",
