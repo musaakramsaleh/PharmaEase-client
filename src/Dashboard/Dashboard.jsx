@@ -3,8 +3,13 @@ import logo from '../../public/logo.png';
 import { Link, NavLink, Outlet } from 'react-router-dom';
 import { FaProductHunt, FaSalesforce, FaUser } from 'react-icons/fa';
 import { GiMedicines } from 'react-icons/gi';
+import UseAuth from '../Hook/UseAuth';
+import UseAdmin from '../Hook/UseAdmin';
 
 const Dashboard = () => {
+    const {user} = UseAuth()
+    const [isAdmin] = UseAdmin()
+    console.log(isAdmin)
     return (
         <div className='flex min-h-screen'>
             <div className="drawer lg:drawer-open">
@@ -22,21 +27,18 @@ const Dashboard = () => {
                         <Link to='/'><p className='text-white'>PharmaEase</p></Link>
                         <Link to='/'><img className='w-10 h-10' src={logo} alt="Logo" /></Link>
                         </div>
-                        <li>
+                        {
+                            user && isAdmin && <li>
                             <NavLink to='/dashboard/seller' className='text-white'>
                                 Seller<GiMedicines />
                             </NavLink>
                         </li>
-                        <li>
+                        }
+                        {user && isAdmin && <li>
                         <NavLink to='/dashboard/user' className='text-white'>
                               All users <FaUser></FaUser>
                             </NavLink>
-                        </li>
-                        <li>
-                        <NavLink to='/dashboard/hello' className='text-white'>
-                              Hello
-                            </NavLink>
-                        </li>
+                        </li>}
                         <li>
                         <NavLink to='/dashboard/sales' className='text-white'>
                               Sales

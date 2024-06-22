@@ -14,14 +14,27 @@ import Swal from 'sweetalert2';
 const Sales = () => {
     const [salesData, setSalesData] = useState([]);
     const axiosSecure = UseAxiosSecure();
-
+    const [status,setStatus] = useState('')
+    const [search,setSearch] = useState('')
+    const [sortOrder,setSortOrder] = useState('')
     const { data: payment = [], isLoading ,refetch} = useQuery({
         queryKey: ['payment'],
         queryFn: async () => {
-          const response = await axiosSecure.get(`/payments`);
+          const response = await axiosSecure.get(`/payments?status=${status}&search=${search}&sort=${sortOrder}`);
           return response.data;
         },
       });
+    //   queryKey: ['products', category, currentPage, itemsPerPage, search, sortOrder],
+    //     queryFn: async () => {
+    //         try {
+    //             const { data } = await axiosNormal.get(`/products?page=${currentPage}&size=${itemsPerPage}&search=${search}&sort=${sortOrder}`);
+    //             return data;
+    //         } catch (error) {
+    //             console.error('Error fetching medicines:', error);
+    //             throw new Error('Failed to fetch medicines');
+    //         }
+    //     },
+    // });
     const updatestatus= async(id)=>{
         try {
             const response = await axiosSecure.patch(`/payments/${id}`, {
@@ -40,7 +53,7 @@ const Sales = () => {
     }
     return (
         <div className="container mx-auto p-4 overflow-x-auto">
-            <Headline title='Your Medicines' description="Manage all the medicines you have uploaded to sell"></Headline>
+            <Headline title='Payment Management' description="Manage all the medicines you have uploaded to sell"></Headline>
             {payment.length === 0 ? (
                 <p>No medicines found.</p>
             ) : (
@@ -51,6 +64,7 @@ const Sales = () => {
                             <th className='border border-b-2'>Seller Email</th>
                             <th className='border border-b-2'>Buyer Email</th>
                             <th className='border border-b-2'>Total Price</th>
+                            <th className='border border-b-2'>Transaction id</th>
                             <th className='border border-b-2'>Status</th>
                             <th className='border border-b-2'>order time</th>
                         </tr>
@@ -62,7 +76,8 @@ const Sales = () => {
                                 <td className='border border-b-2'>{medicine.itemOwner.map(item=><p>{item.email}</p>)}</td>
                                 <td className='border border-b-2'>{medicine.email}</td>
                                 <td className='border border-b-2'>{medicine.price}</td>
-                                <td className='border border-b-2'>{medicine.status==="Pending"?<button onClick={()=>updatestatus(medicine._id)} className='btn bg-gradient-to-b from-cyan-500 to-blue-500 text-white'>{medicine.status}</button>:medicine.status}</td>
+                                <td className='border border-b-2'>{medicine.transaction}</td>
+                                <td className='border border-b-2'>{medicine.status==="Pending"?<button onClick={()=>updatestatus(medicine._id)} className='btn bg-gradient-to-b from-cyan-500 to-blue-500 text-white'>Accept Payment</button>:medicine.status}</td>
                                 <td className='border border-b-2'>{new Date(medicine.date).toLocaleString()}</td>
                             </tr>
                         ))}
