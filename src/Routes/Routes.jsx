@@ -17,6 +17,7 @@ import Adminhome from "../Dashboard/Adminhome";
 import PaymentHistory from "../Dashboard/PaymentHistory";
 import Sellerdashboard from "../Dashboard/Sellerdashboard";
 import UserPayment from "../Dashboard/UserPayment";
+import ManageCategory from "../Dashboard/ManageCategory";
 
 const router = createBrowserRouter([
     {
@@ -92,6 +93,10 @@ const router = createBrowserRouter([
       {
         path:'userpayment',
         element:<UserPayment></UserPayment>
+      },
+      {
+        path:'manage',
+        element:<ManageCategory></ManageCategory>
       }
      ]
     },

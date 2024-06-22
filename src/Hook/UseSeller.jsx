@@ -11,7 +11,7 @@ const UseSeller = () => {
         enabled: !loading,
         queryFn: async () => {
             console.log("admin",user)
-            const res = await axiosSecure.get(`/users/admin/${user.email}`)
+            const res = await axiosSecure.get(`/users/seller/${user.email}`)
             return res.data?.admin
         }
     })

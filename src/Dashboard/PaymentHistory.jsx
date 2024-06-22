@@ -44,13 +44,13 @@ payment.forEach(medicine => {
 });
 
 // Output all items collected with their status
-console.log(allItemsWithStatus);
+ const my = allItemsWithStatus.filter(medicine=>medicine.owner.email===user?.email)
 
    
     return (
         <div className="container mx-auto p-4 overflow-x-auto">
             <Headline title='Payment History' description="All the items that are sold so far"></Headline>
-            {allItemsWithStatus?.length === 0 ? (
+            {my?.length === 0 ? (
                 <p>No medicines found.</p>
             ) : (
                 <table className="table-auto w-full mt-3">
@@ -65,7 +65,7 @@ console.log(allItemsWithStatus);
                         </tr>
                     </thead>
                     <tbody>
-                        {allItemsWithStatus && allItemsWithStatus?.map((medicine,index) => (
+                        {my?.map((medicine,index) => (
                             <tr className='text-center font-bold' key={index}>
                                 <td className='border border-b-2'>{medicine.name}</td>
                                 <td className='border border-b-2'>{medicine.quantity}</td>

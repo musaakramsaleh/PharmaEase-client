@@ -56,6 +56,11 @@ const Dashboard = () => {
                                         Payment Details <FaProductHunt />
                                     </NavLink>
                                 </li>
+                                <li>
+                                    <NavLink to='/dashboard/manage' className='text-white'>
+                                        Manage Category <FaProductHunt />
+                                    </NavLink>
+                                </li>
                             </>
                         )}
 
@@ -75,6 +80,11 @@ const Dashboard = () => {
                                 <li>
                                     <NavLink to='/dashboard/payment' className='text-white'>
                                         Payment Details <FaProductHunt />
+                                    </NavLink>
+                                </li>
+                                <li>
+                                    <NavLink to='/dashboard/seller' className='text-white'>
+                                        My Medicines <FaProductHunt />
                                     </NavLink>
                                 </li>
                             </>
