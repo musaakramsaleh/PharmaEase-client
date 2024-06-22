@@ -1,11 +1,12 @@
 import React from 'react';
 import logo from '../../public/logo.png';
 import { Link, NavLink, Outlet } from 'react-router-dom';
-import { FaProductHunt, FaSalesforce, FaUser } from 'react-icons/fa';
+import { FaCalculator, FaProductHunt, FaSalesforce, FaUser } from 'react-icons/fa';
 import { GiMedicines } from 'react-icons/gi';
 import UseAuth from '../Hook/UseAuth';
 import UseAdmin from '../Hook/UseAdmin';
 import UseSeller from '../Hook/UseSeller';  // Assuming you have this hook
+import { FaAdversal } from 'react-icons/fa6';
 
 const Dashboard = () => {
     const { user } = UseAuth();
@@ -58,7 +59,12 @@ const Dashboard = () => {
                                 </li>
                                 <li>
                                     <NavLink to='/dashboard/manage' className='text-white'>
-                                        Manage Category <FaProductHunt />
+                                        Manage Category <FaCalculator />
+                                    </NavLink>
+                                </li>
+                                <li>
+                                    <NavLink to='/dashboard/bannermanage' className='text-white'>
+                                        Banner Advertise <FaAdversal />
                                     </NavLink>
                                 </li>
                             </>

@@ -7,7 +7,11 @@ import useCategory from '../../Hook/useCategory'
 import useAxios from '../../Hook/useAxios';
 import Swal from 'sweetalert2';
 import UseAxiosSecure from '../../Hook/UseAxiosSecure';
+
+const image_hosting_key = import.meta.env.VITE_IMGAPI;
+const imageurl = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
 function AddMedicineModal({ isOpen, closeModal }) {
+    const axios = useAxios()
     const [open, setIsOpen] = useState(false);
     const {category} = useCategory()
     const { register, handleSubmit, reset, formState: { errors } } = useForm();
@@ -17,34 +21,55 @@ function AddMedicineModal({ isOpen, closeModal }) {
         setIsOpen(isOpen);
     }, [isOpen]);
 
-    const onSubmit =  (data) => {
-        const itemName = data.itemName;
-        const itemGenericName = data.itemGenericName;
-        const shortDescription = data.shortDescription;
-        const imageUpload = data.imageUpload[0];
-        const category = data.category ;
-        const company = data.company;
-        const itemMassUnit = data.itemMassUnit;
-        const perUnitPrice = parseInt(data.perUnitPrice, 10); // Convert to integer
-        const discountPercentage = parseInt(data.discountPercentage, 10) || 0;
-        const name = user.displayName
-        const email  = user.email
-        const owner = {name,email}
-        const product = {itemName,itemGenericName,shortDescription,imageUpload,category,company,itemMassUnit,perUnitPrice,discountPercentage,owner}
-        if(user && user.email){
-            axiosSecure.post('/product',product)
-            .then(res=>{
-                console.log(res.data)
-                if(res.data.insertedId){
-                    Swal.fire({
-                        position: "center",
-                        icon: "success",
-                        title: "Your work has been saved",
-                        showConfirmButton: false,
-                        timer: 1500
-                      });
+    const onSubmit = async (data) => {
+        const formData = new FormData();
+        formData.append('image', data.imageUpload[0]);
+
+        try {
+            const imgUploadRes = await axios.post(imageurl, formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                },
+            });
+               
+            if (imgUploadRes.data.success) {
+                const imageUpload = imgUploadRes.data.data.url;
+
+                const itemName = data.itemName;
+                const itemGenericName = data.itemGenericName;
+                const shortDescription = data.shortDescription;
+                const category = data.category;
+                const company = data.company;
+                const itemMassUnit = data.itemMassUnit;
+                const perUnitPrice = parseInt(data.perUnitPrice, 10); // Convert to integer
+                const discountPercentage = parseInt(data.discountPercentage, 10) || 0;
+                const name = user.displayName;
+                const email = user.email;
+                const owner = { name, email };
+                const product = { itemName, itemGenericName, shortDescription, imageUpload, category, company, itemMassUnit, perUnitPrice, discountPercentage, owner };
+
+                if (user && user.email) {
+                    const res = await axiosSecure.post('/product', product);
+                    if (res.data.insertedId) {
+                        Swal.fire({
+                            position: "center",
+                            icon: "success",
+                            title: "Your work has been saved",
+                            showConfirmButton: false,
+                            timer: 1500,
+                        });
+                        reset(); // Reset the form after successful submission
+                        closeModal(); // Close the modal
+                    }
                 }
-              })
+            }
+        } catch (error) {
+            console.error("Image upload failed:", error);
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Something went wrong with the image upload!',
+            });
         }
     };
     
