@@ -6,6 +6,7 @@ import useAxios from '../Hook/useAxios';
 import UseAuth from '../Hook/UseAuth';
 import Headline from '../shared/Headline';
 import { FaShoppingBasket } from 'react-icons/fa';
+import { Helmet } from 'react-helmet-async';
 
 const ShoppingCart = () => {
     const navigate = useNavigate();
@@ -67,6 +68,7 @@ const ShoppingCart = () => {
 
     return (
         <div className="container mx-auto p-4">
+            <Helmet><title>PharmaEase-Shopping Cart</title></Helmet>
             <Headline title="Shopping Cart" description={`Total amount $${total}`} />
             {cart.length === 0 ? (
                 <div className="flex flex-col items-center justify-center h-full">

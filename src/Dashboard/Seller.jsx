@@ -6,6 +6,7 @@ import useAxios from '../Hook/useAxios';
 import UpdateMedicineModal from '../Component/Modal/UpdateMedicineModal'; // Import the UpdateMedicineModal
 import Headline from '../shared/Headline';
 import UseAxiosSecure from '../Hook/UseAxiosSecure';
+import { Helmet } from 'react-helmet-async';
 
 const Seller = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -37,6 +38,7 @@ const Seller = () => {
     refetch()
     return (
         <div className="container mx-auto p-4 overflow-x-auto">
+            <Helmet><title>PharmaEase-Seller</title></Helmet>
             <Headline title='Your Medicines' description="Manage all the medicines you have uploaded to sell"></Headline>
             {medicines.length === 0 ? (
                 <p>No medicines found.</p>

@@ -8,6 +8,7 @@ import UseAuth from '../../../Hook/UseAuth';
 import Swal from 'sweetalert2';
 import { FaGoogle } from 'react-icons/fa';
 import useAxios from '../../../Hook/useAxios';
+import { Helmet } from 'react-helmet-async';
 
 const Register = () => {
     const {createUser,user,googleLogin,updateuserProfile} = UseAuth()
@@ -88,6 +89,7 @@ const Register = () => {
     }
     return (
         <div className='max-w-[1440px] mx-auto'>
+          <Helmet><title>PharmaEase-Register</title></Helmet>
            <h2 className=' text-4xl font-bold text-center mt-20'>Register</h2>
            <div className='mx-auto w-1/2 mt-10'>
            <form onSubmit={handleSubmit(onSubmit)} >
@@ -119,13 +121,15 @@ const Register = () => {
            {...register("photo", { required: true })}
            />
            <p>Already have an account?<Link to='/login' className='text-blue underline text-blue-700'>Login</Link></p>
-           <input type="Submit" defaultValue='Register' placeholder="Type here" className="cursor-pointer bg-secondary text-white font-lexend font-bold mt-5 input w-full" />
+           <input type="Submit" defaultValue='Register' placeholder="Type here" className="cursor-pointer bg-red-600 text-white font-lexend font-bold mt-5 input w-full" />
            </form>
            </div>
+           <div className='max-w-[300px] mx-auto mt-10'>
            <button 
           onClick={() => handlesociallogin(googleLogin)} 
-          className='p-2 flex items-center justify-between gap-1 bg-secondary w-[3/4] rounded-lg text-white font-semibold mb-4 text-[16px]'>
+          className='p-2 flex items-center justify-between gap-1 bg-red-600 w-[3/4] rounded-lg text-white font-semibold mb-4 text-[16px]'>
           <FaGoogle />Google Login</button>
+           </div>
             <ToastContainer />
         </div>
     );

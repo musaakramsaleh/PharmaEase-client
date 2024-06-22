@@ -3,6 +3,7 @@ import React from 'react';
 import UseAxiosSecure from '../Hook/UseAxiosSecure';
 import { FaDollarSign, FaPills, FaProductHunt, FaUser } from 'react-icons/fa';
 import useAxios from '../Hook/useAxios';
+import { Helmet } from 'react-helmet-async';
 
 const Adminhome = () => {
     const axios = useAxios()
@@ -21,6 +22,7 @@ const Adminhome = () => {
     console.log(totalPaid,filter2)
     return (
         <div>
+            <Helmet><title>PharmaEase-Adminhome</title></Helmet>
             <div className="stats shadow">
   
   <div className="stat">

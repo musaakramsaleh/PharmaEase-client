@@ -20,6 +20,7 @@ import UserPayment from "../Dashboard/UserPayment";
 import ManageCategory from "../Dashboard/ManageCategory";
 import Bannermanage from "../Dashboard/Bannermanage";
 import Adminbanner from "../Dashboard/Adminbanner";
+import Detailedsell from "../Dashboard/Detailedsell";
 
 const router = createBrowserRouter([
     {
@@ -56,57 +57,57 @@ const router = createBrowserRouter([
     },
     {
       path:'/invoice',
-      element:<Invoice></Invoice>
+      element:<Privateroute><Invoice></Invoice></Privateroute>
     }
     ]
     },
     {
      path:'dashboard',
-     element:<Dashboard></Dashboard>,
+     element:<Privateroute><Dashboard></Dashboard></Privateroute>,
      children:[
       {
        path:'admin',
-       element:<Adminhome></Adminhome>
+       element:<Privateroute><Adminhome></Adminhome></Privateroute>
       },
       {
         path:'seller',
-        element:<Seller></Seller>
-      },
-      {
-        path:'hello',
-        element: <p>Hello World</p>
+        element:<Privateroute><Seller></Seller></Privateroute>
       },
       {
         path:'user',
-        element: <User></User>
+        element: <Privateroute><User></User></Privateroute>
+      },
+      {
+        path:'detailedsell',
+        element: <Privateroute><Detailedsell></Detailedsell></Privateroute>
       },
       {
         path:'sales',
-        element:<Sales></Sales>
+        element:<Privateroute><Sales></Sales></Privateroute>
       },
       {
         path:'payment',
-        element:<PaymentHistory></PaymentHistory>
+        element:<Privateroute><PaymentHistory></PaymentHistory></Privateroute>
       },
       {
         path:'sellerdashboard',
-        element:<Sellerdashboard></Sellerdashboard>
+        element:<Privateroute><Sellerdashboard></Sellerdashboard></Privateroute>
       },
       {
         path:'userpayment',
-        element:<UserPayment></UserPayment>
+        element:<Privateroute><UserPayment></UserPayment></Privateroute>
       },
       {
         path:'manage',
-        element:<ManageCategory></ManageCategory>
+        element:<Privateroute><ManageCategory></ManageCategory></Privateroute>
       },
       {
         path:'bannermanage',
-        element:<Bannermanage></Bannermanage>
+        element:<Privateroute><Bannermanage></Bannermanage></Privateroute>
       },
       {
         path:'adminbanner',
-        element:<Adminbanner></Adminbanner>
+        element:<Privateroute><Adminbanner></Adminbanner></Privateroute>
       }
      ]
     },

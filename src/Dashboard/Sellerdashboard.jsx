@@ -15,6 +15,7 @@ import { saveAs } from 'file-saver';
 import useAxios from '../Hook/useAxios';
 import UseAuth from '../Hook/UseAuth';
 import { FaDollarSign } from 'react-icons/fa';
+import { Helmet } from 'react-helmet-async';
 const Sellerdashboard = () => {
     const [status, setStatus] = useState('');
     const [search, setSearch] = useState('');
@@ -54,6 +55,7 @@ const totalPending = filter2.reduce((acc, curr) => acc + curr.price, 0);
 
     return (
         <div>
+          <Helmet><title>PharmaEase-SellerDashboard</title></Helmet>
             <div className="stats shadow">
   
   <div className="stat">

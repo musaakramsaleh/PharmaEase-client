@@ -6,6 +6,7 @@ import { useLocation } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import UseAxiosSecure from '../Hook/UseAxiosSecure';
 import useAxios from '../Hook/useAxios';
+import { Helmet } from 'react-helmet-async';
 
 const Invoice = () => {
   const { user } = UseAuth();
@@ -32,6 +33,7 @@ const Invoice = () => {
 
   return (
     <div className="p-4">
+      <Helmet><title>PharmaEase-Invoice</title></Helmet>
       <div ref={componentRef} className="invoice max-w-[600px] mx-auto p-4 bg-white shadow-md rounded-md">
         <div className="flex items-center justify-center text-2xl mb-4">
           <p className="font-bold text-gray-800">PharmaEase</p>

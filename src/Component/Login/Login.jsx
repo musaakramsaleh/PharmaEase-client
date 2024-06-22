@@ -5,6 +5,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { FaGoogle } from "react-icons/fa";
 import UseAuth from '../../Hook/UseAuth';
+import { Helmet } from 'react-helmet-async';
 
 const Login = () => {
     const { user, loginUser, googleLogin } = UseAuth();
@@ -48,6 +49,7 @@ const Login = () => {
 
     return (
         <div className='min-h-screen'>
+            <Helmet><title>PharmaEase-Login</title></Helmet>
             <h2 className='text-center mt-10 text-2xl font-bold'>Login</h2>
             <div className="hero max-w-[1440px] mx-auto pb-10 mt-10">
                 <div className="hero-content flex-col lg:flex-row-reverse">
@@ -80,14 +82,14 @@ const Login = () => {
                                 {errors.password && <span>This field is required</span>}
                             </div>
                             <div className="form-control mt-6">
-                                <button className="btn bg-gradient-to-r bg-secondary font-lexend text-white font-bold">Login</button>
+                                <button className="btn bg-gradient-to-r bg-red-600 font-lexend text-white font-bold">Login</button>
                                 <p>Do not have an account?<Link to='/Register' className='text-blue underline text-blue-700'>Register</Link></p>
                             </div>
                         </form>
                         <div className='flex justify-around'>
                             <button 
                                 onClick={() => handlesociallogin(googleLogin)} 
-                                className='p-2 flex items-center justify-between gap-1 bg-secondary w-[3/4] rounded-lg text-white font-semibold mb-4 text-[16px]'
+                                className='p-2 flex items-center justify-between gap-1 bg-red-600 w-[3/4] rounded-lg text-white font-semibold mb-4 text-[16px]'
                             >
                                 <FaGoogle />Google Login
                             </button>

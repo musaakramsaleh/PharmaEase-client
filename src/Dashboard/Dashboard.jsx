@@ -7,6 +7,7 @@ import UseAuth from '../Hook/UseAuth';
 import UseAdmin from '../Hook/UseAdmin';
 import UseSeller from '../Hook/UseSeller';  // Assuming you have this hook
 import { FaAdversal } from 'react-icons/fa6';
+import { Helmet } from 'react-helmet-async';
 
 const Dashboard = () => {
     const { user } = UseAuth();
@@ -17,6 +18,7 @@ const Dashboard = () => {
     
     return (
         <div className='flex min-h-screen'>
+            <Helmet><title>PharmaEase-Dashboard</title></Helmet>
             <div className="drawer lg:drawer-open">
                 <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
                 <div className="drawer-content flex flex-col">
@@ -53,18 +55,13 @@ const Dashboard = () => {
                                     </NavLink>
                                 </li>
                                 <li>
-                                    <NavLink to='/dashboard/payment' className='text-white'>
-                                        Payment Details <FaProductHunt />
-                                    </NavLink>
-                                </li>
-                                <li>
                                     <NavLink to='/dashboard/manage' className='text-white'>
                                         Manage Category <FaCalculator />
                                     </NavLink>
                                 </li>
                                 <li>
-                                    <NavLink to='/dashboard/bannermanage' className='text-white'>
-                                        Banner Advertise <FaAdversal />
+                                    <NavLink to='/dashboard/detailedsell' className='text-white'>
+                                        Sales Report<FaCalculator />
                                     </NavLink>
                                 </li>
                                 <li>
@@ -84,8 +81,8 @@ const Dashboard = () => {
                                     </NavLink>
                                 </li>
                                 <li>
-                                    <NavLink to='/dashboard/sales' className='text-white'>
-                                        Sales <FaSalesforce />
+                                    <NavLink to='/dashboard/bannermanage' className='text-white'>
+                                        Banner Advertise <FaAdversal />
                                     </NavLink>
                                 </li>
                                 <li>
@@ -98,6 +95,7 @@ const Dashboard = () => {
                                         My Medicines <FaProductHunt />
                                     </NavLink>
                                 </li>
+                                
                             </>
                         )}
 

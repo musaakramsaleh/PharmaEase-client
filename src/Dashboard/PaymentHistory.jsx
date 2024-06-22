@@ -14,6 +14,7 @@ import Swal from 'sweetalert2';
 import { saveAs } from 'file-saver';
 import useAxios from '../Hook/useAxios';
 import UseAuth from '../Hook/UseAuth';
+import { Helmet } from 'react-helmet-async';
 const PaymentHistory = () => {
     const [status, setStatus] = useState('');
     const [search, setSearch] = useState('');
@@ -49,6 +50,7 @@ payment.forEach(medicine => {
    
     return (
         <div className="container mx-auto p-4 overflow-x-auto">
+            <Helmet><title>PharmaEase-Payment History</title></Helmet>
             <Headline title='Payment History' description="All the items that are sold so far"></Headline>
             {my?.length === 0 ? (
                 <p>No medicines found.</p>

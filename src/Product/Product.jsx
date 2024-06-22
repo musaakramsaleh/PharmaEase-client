@@ -7,6 +7,7 @@ import UseAuth from '../Hook/UseAuth';
 import Modal from '../Component/Modal/Modal';
 import Swal from 'sweetalert2';
 import { FaEye } from 'react-icons/fa';
+import { Helmet } from 'react-helmet-async';
 
 const Product = () => {
     const axiosNormal = useAxios();
@@ -87,6 +88,7 @@ const Product = () => {
 
     return (
         <div>
+            <Helmet><title>PharmaEase-Product</title></Helmet>
             <form className='max-w-[325px] my-10 mx-auto' onSubmit={handleSearch}>
                 <div className='flex p-1 overflow-hidden border rounded-lg focus-within:ring focus-within:ring-opacity-40 focus-within:border-blue-400 focus-within:ring-blue-300'>
                     <input

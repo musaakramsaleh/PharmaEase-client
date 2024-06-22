@@ -6,6 +6,7 @@ import UseAxiosSecure from '../Hook/UseAxiosSecure';
 import useCategory from '../Hook/useCategory';
 import Updatecategorymodal from '../Component/Modal/Updatecategorymodal';
 import Swal from 'sweetalert2';
+import { Helmet } from 'react-helmet-async';
 
 const ManageCategory = () => {
     const { category, refetch } = useCategory();
@@ -87,6 +88,7 @@ const ManageCategory = () => {
     };
     return (
         <div>
+            <Helmet><title>PharmaEase-Manage Category</title></Helmet>
             <Headline title="All Categories" description="Add or remove categories from medicine list" />
             <button onClick={openModal} className="px-4 py-2 bg-green-500 text-white rounded mt-4 hover:bg-green-600">
                 Add new Category

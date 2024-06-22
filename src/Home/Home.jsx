@@ -7,6 +7,8 @@ import { Helmet } from 'react-helmet-async';
 import Headline from '../shared/Headline';
 import Category from './Category';
 import FAQ from './FAQ';
+import DiscountProduct from './DiscountProduct';
+import Partner from './Partner';
 
 
 
@@ -19,6 +21,8 @@ const Home = () => {
               <Headline title="Category" description="Buy from wide range of variety of products"></Headline>
               <Category></Category>
               <FAQ></FAQ>
+              <DiscountProduct></DiscountProduct>
+              <Partner></Partner>
             </div>
         </div>
     );

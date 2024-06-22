@@ -17,7 +17,16 @@ const handleSignout =()=>{
        <li><NavLink to='/' className={({isActive})=>isActive?'text-white font-bold text-2xl':'text-black font-bold text-2xl'}>Home</NavLink></li>
        <li><NavLink to='/product' className={({isActive})=>isActive?'text-white font-bold text-2xl':'text-black font-bold text-2xl'}>Shop</NavLink></li>
        <li><NavLink to='/shopping' className={({isActive})=>isActive?'text-white font-bold text-2xl':'text-black font-bold text-2xl'}>Shopping<sup>{cart.length}</sup><FaShoppingCart></FaShoppingCart></NavLink></li>
-       <li><NavLink to='/' className={({isActive})=>isActive?'text-white font-bold text-2xl':'text-black font-bold text-2xl'}>Languages</NavLink></li>
+       <div className="dropdown z-50">
+                    <div tabIndex={0} className="btn btn-ghost ">
+                        Languages
+                    </div>
+                    <ul tabIndex={0} className="menu menu-sm dropdown-content mt-1 p-2 shadow bg-base-100 rounded-box">
+                        <li><Link to="/" className="text-black font-bold text-xl block">English</Link></li>
+                        <li><Link to="/" className="text-black font-bold text-xl block">Spanish</Link></li>
+                        {/* Add more language options as needed */}
+                    </ul>
+                </div>
     </>
     return (
         <div className="navbar bg-gradient-to-r from-cyan-500 to-blue-500">
@@ -71,7 +80,7 @@ const handleSignout =()=>{
    </div>
    {/* <button onClick={()=>handleSignout()} className='bg-secondary font-lexend px-5 py-3 rounded-lg font-bold text-white block text-center'></button> */}
      </div> :<>
-  <Link to='/login'  className='bg-secondary font-lexend px-5 py-3 rounded-lg font-bold text-white block text-center'>Login</Link>
+  <Link to='/login'  className='bg-red-600 font-lexend px-5 py-3 rounded-lg font-bold text-white block text-center'>Join us</Link>
   </>
    
   

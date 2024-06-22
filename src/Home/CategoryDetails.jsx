@@ -6,6 +6,7 @@ import useCart from '../Hook/useCart';
 import UseAuth from '../Hook/UseAuth';
 import Modal from '../Component/Modal/Modal';
 import Swal from 'sweetalert2';
+import { Helmet } from 'react-helmet-async';
 
 const CategoryDetails = () => {
     const axiosNormal = useAxios();
@@ -86,6 +87,7 @@ const CategoryDetails = () => {
 
     return (
         <div>
+            <Helmet><title>PharmaEase-Categorydetails</title></Helmet>
             <form className='max-w-[325px] my-10 mx-auto' onSubmit={handleSearch}>
                 <div className='flex p-1 overflow-hidden border rounded-lg focus-within:ring focus-within:ring-opacity-40 focus-within:border-blue-400 focus-within:ring-blue-300'>
                     <input

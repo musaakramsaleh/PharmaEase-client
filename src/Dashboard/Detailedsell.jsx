@@ -1,27 +1,54 @@
-import React from 'react';
-import useAxios from '../Hook/useAxios';
-import UseAuth from '../Hook/UseAuth';
+import React, { useState, useEffect } from 'react';
+import DataTable from 'react-data-table-component';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
+import { CSVLink } from 'react-csv';
+import * as XLSX from 'xlsx';
+import jsPDF from 'jspdf';
+import { Document, Packer, Paragraph, Table, TableCell, TableRow, WidthType } from 'docx';
+import autoTable from 'jspdf-autotable';
 import { useQuery } from '@tanstack/react-query';
+import UseAxiosSecure from '../Hook/UseAxiosSecure';
 import Headline from '../shared/Headline';
-import { Helmet } from 'react-helmet-async';
-
-const UserPayment = () => {
+import Swal from 'sweetalert2';
+import { saveAs } from 'file-saver';
+import useAxios from '../Hook/useAxios';
+const Detailedsell = () => {
+    const [status, setStatus] = useState('');
+    const [search, setSearch] = useState('');
+    const [sortOrder, setSortOrder] = useState('');
+    const axiosSecure = UseAxiosSecure();
     const axios = useAxios()
-    const {user} = UseAuth()
     const { data: payment = [], isLoading, refetch } = useQuery({
-        queryKey: ['payment',user?.email],
+        queryKey: ['payment'],
         queryFn: async () => {
-            const response = await axios.get(`/payment/${user?.email}`);
+            const response = await axios.get(`/payments?status=${status}&search=${search}&sort=${sortOrder}`);
             return response.data;
         },
         
     });
-    console.log(payment)
+
+    const updatestatus = async (id) => {
+        try {
+            const response = await axiosSecure.patch(`/payments/${id}`, { status: "paid" });
+            console.log(response.data);
+            Swal.fire({
+                icon: 'success',
+                title: 'Status Updated',
+                text: 'Payment status has been updated successfully!',
+            });
+            refetch();
+        } catch (error) {
+            console.error('Error updating status:', error);
+        }
+    };
+
+    if(isLoading){
+      return <p>Data is loading</p>
+    }
     return (
         <div className="container mx-auto p-4 overflow-x-auto">
-            <Helmet><title>PharmaEase-user payment</title></Helmet>
-            <Headline title='Payment Management' description="See your transaction history"></Headline>
-            
+            <Headline title='Payment Management' description="Manage all the medicines you have uploaded to sell"></Headline>
             {payment?.length === 0 ? (
                 <p>No medicines found.</p>
             ) : (
@@ -33,6 +60,7 @@ const UserPayment = () => {
                             <th className='border border-b-2'>Buyer Email</th>
                             <th className='border border-b-2'>Total Price</th>
                             <th className='border border-b-2'>Transaction</th>
+                            <th className='border border-b-2'>Status</th>
                             <th className='border border-b-2'>order time</th>
                         </tr>
                     </thead>
@@ -44,6 +72,7 @@ const UserPayment = () => {
                                 <td className='border border-b-2'>{medicine.email}</td>
                                 <td className='border border-b-2'>{medicine.price}</td>
                                 <td className='border border-b-2'>{medicine.transaction}</td>
+                                <td className='border border-b-2'>{medicine.status==="Pending"?<button onClick={()=>updatestatus(medicine._id)} className='btn bg-gradient-to-b from-cyan-500 to-blue-500 text-white'>Accept Payment</button>:medicine.status}</td>
                                 <td className='border border-b-2'>{new Date(medicine.date).toLocaleString()}</td>
                             </tr>
                         ))}
@@ -54,4 +83,4 @@ const UserPayment = () => {
     );
 };
 
-export default UserPayment;
+export default Detailedsell;
