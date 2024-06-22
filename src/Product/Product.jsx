@@ -46,6 +46,7 @@ const Product = () => {
     const handleSearch = (e) => {
         e.preventDefault();
         const text = e.target.search.value;
+        console.log(text)
         setSearch(text);
         setCurrentPage(1);
     };
@@ -100,7 +101,7 @@ const Product = () => {
                     />
                     <button
                         type='submit'
-                        className='px-1 md:px-4 py-3 text-sm font-medium tracking-wider text-gray-100 uppercase transition-colors duration-300 transform bg-gradient-to-r from-cyan-500 to-blue-500  text-white rounded-md hover:bg-gray-600 focus:bg-gray-600 focus:outline-none'
+                        className='px-1 md:px-4 py-3 text-sm font-medium tracking-wider  uppercase transition-colors duration-300 transform bg-gradient-to-r from-cyan-500 to-blue-500  text-white rounded-md hover:bg-gray-600 focus:bg-gray-600 focus:outline-none'
                     >
                         Search
                     </button>

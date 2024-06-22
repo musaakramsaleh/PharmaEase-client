@@ -169,7 +169,8 @@ const Sales = () => {
     }
     return (
         <div className="container mx-auto p-4 overflow-x-auto">
-            <Headline title='Payment Management' description="Manage all the medicines you have uploaded to sell"></Headline>
+            <Headline title='Sales Report' description="Manage the sales report page"></Headline>
+            
             <div className="my-4 flex justify-between items-center">
                 <CSVLink data={payment} filename="sales_report.csv" className="btn bg-gradient-to-b from-green-500 to-blue-500 text-white p-2 rounded">Export CSV</CSVLink>
                 <button onClick={exportXLSX} className="btn bg-gradient-to-b from-green-500 to-blue-500 text-white p-2 rounded">Export XLSX</button>
@@ -199,7 +200,7 @@ const Sales = () => {
                                 <td className='border border-b-2'>{medicine.email}</td>
                                 <td className='border border-b-2'>{medicine.price}</td>
                                 <td className='border border-b-2'>{medicine.transaction}</td>
-                                <td className='border border-b-2'>{medicine.status==="Pending"?<button onClick={()=>updatestatus(medicine._id)} className='btn bg-gradient-to-b from-cyan-500 to-blue-500 text-white'>Accept Payment</button>:medicine.status}</td>
+                                <td className='border border-b-2'>{medicine.status}</td>
                                 <td className='border border-b-2'>{new Date(medicine.date).toLocaleString()}</td>
                             </tr>
                         ))}

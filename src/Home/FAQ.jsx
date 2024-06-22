@@ -4,7 +4,7 @@ import Headline from '../shared/Headline';
 const FAQ = () => {
     return (
         <div className='max-w-[1440px] mx-auto my-10'>
-            <Headline title="FAQs" description="All the frequently asked aquestioned"></Headline>
+            <Headline title="FAQs" description="All the frequently asked questiones"></Headline>
             <div className="collapse collapse-arrow bg-base-200 mt-5">
   <input type="radio" name="my-accordion-2" defaultChecked /> 
   <div className="collapse-title text-xl font-medium">
