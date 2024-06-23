@@ -69,6 +69,11 @@ const Dashboard = () => {
                                         Banner Advertise<FaAdversal />
                                     </NavLink>
                                 </li>
+                                <li>
+                                <NavLink to='/dashboard/userpayment' className='text-white'>
+                                   Your bought items <FaUser />
+                                </NavLink>
+                            </li>
                             </>
                         )}
 
@@ -95,6 +100,11 @@ const Dashboard = () => {
                                         My Medicines <FaProductHunt />
                                     </NavLink>
                                 </li>
+                                <li>
+                                <NavLink to='/dashboard/userpayment' className='text-white'>
+                                   Your bought items <FaUser />
+                                </NavLink>
+                            </li>
                                 
                             </>
                         )}

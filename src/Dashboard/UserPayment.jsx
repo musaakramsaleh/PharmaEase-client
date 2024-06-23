@@ -20,7 +20,7 @@ const UserPayment = () => {
     return (
         <div className="container mx-auto p-4 overflow-x-auto">
             <Helmet><title>PharmaEase-user payment</title></Helmet>
-            <Headline title='Payment Management' description="See your transaction history"></Headline>
+            <Headline title='Your Transactions' description="See your transaction history"></Headline>
             
             {payment?.length === 0 ? (
                 <p>No medicines found.</p>
