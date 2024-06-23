@@ -16,7 +16,7 @@ const Banner = () => {
             <Swiper pagination={true} loop={true} modules={[Pagination]} className="text-center">
                 {add.map((item, index) => (
                     <SwiperSlide key={index}>
-                        <div className={`bg-green-300 h-[400px] mx-auto flex p-[50px] items-center justify-center rounded-lg`}>
+                        <div className={`bg-blue-600 h-[400px] mx-auto flex p-[50px] items-center justify-center rounded-lg`}>
                             <div>
                                 <img className='w-[300px] h-[200px]' src={item.imageUpload} alt="" />
                             </div>

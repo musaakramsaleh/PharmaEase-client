@@ -9,7 +9,7 @@ const Partner = () => {
     return (
         <div>
            <Headline title="Our Partners"></Headline>
-           <div className='max-w-[1440px] mx-auto grid grid-cols-1 md:grid-cols-4 gap-3 mt-5 place-items-center mb-14'>
+           <div className='max-w-[1440px] mx-auto grid grid-cols-1 md:grid-cols-4 gap-3 mt-10 place-items-center mb-16'>
            <div>
             <img src={johnson} alt="" />
             <p className='text-center text-2xl font-bold'>Johnson and Johnson</p>

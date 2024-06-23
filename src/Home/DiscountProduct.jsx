@@ -56,9 +56,9 @@ const DiscountProduct = () => {
       >
         {discountproduct.map((client, index) => (
           <SwiperSlide key={index}>
-            <div className="card bg-base-100 shadow-xl">
+            <div className="card bg-base-100 shadow-xl my-10">
               <div className="card-body">
-                <img src={client.imageUpload} alt="" />
+                <img className='w-[300px] h-[220px] mx-auto' src={client.imageUpload} alt="" />
                 <h2 className="text-black text-2xl font-medium text-center">{client.itemName}</h2> 
                 <h2 className="text-black text-xl font-medium text-center">Price: ${client.perUnitPrice}</h2> 
                 <h2 className="text-black text-xl font-medium text-center">Discount Percentage: {client.discountPercentage}</h2> 
