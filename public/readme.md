@@ -13,3 +13,5 @@
 - Data filter has been intgrated
 - MongoDB has been used as the database of the project.
 - Dashboard page for multiple purpose
+- admin email: bottle@glass.com
+- admin password: Asdf123
